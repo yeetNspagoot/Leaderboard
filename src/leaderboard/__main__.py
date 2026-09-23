@@ -1,4 +1,3 @@
-
 import aiosqlite
 import hikari
 import lightbulb
@@ -9,8 +8,10 @@ from leaderboard.utils import database
 
 def main() -> None:
     bot = hikari.GatewayBot(
-        token=config.DISCORD_TOKEN, 
-        intents=hikari.Intents.GUILDS | hikari.Intents.GUILD_MESSAGES | hikari.Intents.MESSAGE_CONTENT
+        token=config.DISCORD_TOKEN,
+        intents=hikari.Intents.GUILDS
+        | hikari.Intents.GUILD_MESSAGES
+        | hikari.Intents.MESSAGE_CONTENT,
     )
 
     client = lightbulb.client_from_app(bot)
@@ -32,6 +33,7 @@ def main() -> None:
         await client.stop()
 
     bot.run()
+
 
 if __name__ == "__main__":
     main()

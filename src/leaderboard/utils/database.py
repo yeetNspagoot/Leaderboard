@@ -33,7 +33,13 @@ async def open_database() -> aiosqlite.Connection:
     return db
 
 
-async def record_message(db: aiosqlite.Connection, guild_id: hikari.Snowflake, user_id: hikari.Snowflake, username: str, attachment_count: int) -> None:
+async def record_message(
+    db: aiosqlite.Connection,
+    guild_id: hikari.Snowflake,
+    user_id: hikari.Snowflake,
+    username: str,
+    attachment_count: int,
+) -> None:
     await db.execute(
         """
         INSERT INTO leaderboard (
@@ -49,7 +55,10 @@ async def record_message(db: aiosqlite.Connection, guild_id: hikari.Snowflake, u
     )
     await db.commit()
 
-async def get_leaderboard_for_guild(db: aiosqlite.Connection, guild_id: hikari.Snowflake) -> tuple[list[aiosqlite.Row], list[aiosqlite.Row]]:
+
+async def get_leaderboard_for_guild(
+    db: aiosqlite.Connection, guild_id: hikari.Snowflake
+) -> tuple[list[aiosqlite.Row], list[aiosqlite.Row]]:
     LIMIT = 10
 
     async with db.execute(
